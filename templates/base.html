@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Gran Proyecto</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: #000; 
+            color: #fff; 
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        nav {
+            position: relative;
+            z-index: 100;
+            padding: 15px;
+            background: rgba(0,0,0,0.6);
+        }
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        .contenido {
+            position: relative;
+            z-index: 10;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="{{ url_for('inicio') }}">🏠 Inicio</a>
+    <a href="{{ url_for('galeria') }}">📷 Galería</a>
+    <a href="{{ url_for('video') }}">🎬 Videos</a>
+    <a href="{{ url_for('musica') }}">🎵 Músicas</a>
+    <a href="{{ url_for('galaxia') }}">🌌 Galaxia</a>
+</nav>
+
+<div class="contenido">
+    {% block contenido %}{% endblock %}
+</div>
+
+<!-- Librería Three.js cargada UNA SOLA VEZ aquí -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.min.js"></script>
+
+<script>
+// Fondo de estrellas para las demás páginas SOLAMENTE
+document.addEventListener('DOMContentLoaded', function() {
+    if (!document.getElementById('galaxia')) {
+        const escena = new THREE.Scene();
+        const camara = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const render = new THREE.WebGLRenderer({antialias: true, alpha: true});
+        render.setSize(window.innerWidth, window.innerHeight);
+        document.body.insertBefore(render.domElement, document.body.firstChild);
+        render.domElement.style.position = 'fixed';
+        render.domElement.style.top = '0';
+        render.domElement.style.left = '0';
+        render.domElement.style.zIndex = '0';
+
+        const geoEstrellas = new THREE.BufferGeometry();
+        const cantEstrellas = 2000;
+        const posEstrellas = new Float32Array(cantEstrellas * 3);
+        for (let i = 0; i < cantEstrellas * 3; i++) {
+            posEstrellas[i] = (Math.random() - 0.5) * 200;
+        }
+        geoEstrellas.setAttribute('position', new THREE.BufferAttribute(posEstrellas, 3));
+        const matEstrellas = new THREE.PointsMaterial({color: 0xffffff, size: 0.15});
+        const estrellas = new THREE.Points(geoEstrellas, matEstrellas);
+        escena.add(estrellas);
+        camara.position.z = 60;
+
+        function animar() {
+            requestAnimationFrame(animar);
+            estrellas.rotation.y += 0.0003;
+            render.render(escena, camara);
+        }
+        animar();
+    }
+});
+</script>
+
+</body>
+</html>

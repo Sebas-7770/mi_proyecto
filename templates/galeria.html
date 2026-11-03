@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block contenido %}
+
+<h1 style="text-align: center; margin-top: 30px;">📷 Mis Imágenes</h1>
+<p style="text-align: center; margin-bottom: 40px;">Aquí puedes ver mis fotos:</p>
+
+<style>
+/* Contenedor: organiza las fotos en filas */
+.galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Cada cuadro de foto: mismo tamaño para todas */
+.cuadro-foto {
+    width: 100%;
+    height: 280px; /* Altura igual para todas */
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
+}
+
+/* La imagen: se ajusta sin deformarse */
+.cuadro-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorta y centra → todas iguales */
+    transition: transform 0.3s ease;
+}
+
+/* Efecto al pasar el mouse */
+.cuadro-foto img:hover {
+    transform: scale(1.05);
+}
+</style>
+
+<div class="galeria">
+
+<!-- Primera foto -->
+ <div class="cuadro-foto">
+<img src="{{ url_for('static', filename='mi_foto.jpg') }}" alt="Mi foto" class="imagen">
+<br><br>
+</div>
+
+<!-- Segunda foto -->
+ <div class="cuadro-foto">
+<img src="{{ url_for('static', filename='mi_foto2.jpg') }}" alt="Mi segunda foto" class="imagen">
+<br><br>
+</div>
+
+<!-- Tercera foto -->
+ <div class="cuadro-foto">
+<img src="{{ url_for('static', filename='mi_foto3.jpg') }}" alt="Mi tercera foto" class="imagen">
+<br><br>
+</div>
+
+<!-- Cuarta foto -->
+ <div class="cuadro-foto">
+<img src="{{ url_for('static', filename='mi_foto4.jpg') }}" alt="Mi cuarta foto" class="imagen">
+<br><br>
+</div>
+
+<!-- Quinta foto -->
+ <div class="cuadro-foto">
+<img src="{{ url_for('static', filename='mi_foto5.jpg') }}" alt="Mi quinta foto" class="imagen">
+<br><br>
+</div>
+
+<!-- Sexta foto -->
+ <div class="cuadro-foto">
+<img src="{{ url_for('static', filename='mi_foto6.jpg') }}" alt="Mi sexta foto" class="imagen">
+<br><br>
+</div>
+
+<!-- Séptima foto -->
+ <div class="cuadro-foto">
+<img src="{{ url_for('static', filename='mi_foto7.jpg') }}" alt="Mi séptima foto" class="imagen">
+<br><br>
+</div>
+
+<!-- Octava foto -->
+ <div class="cuadro-foto">
+<img src="{{ url_for('static', filename='mi_foto8.jpg') }}" alt="Mi octava foto" class="imagen">
+<br><br>
+</div>
+
+<!-- Novena foto -->
+ <div class="cuadro-foto">
+<img src="{{ url_for('static', filename='mi_foto9.jpg') }}" alt="Mi novena foto" class="imagen">
+<br><br>
+</div>
+
+<!-- Décima foto -->
+ <div class="cuadro-foto">
+<img src="{{ url_for('static', filename='mi_foto10.jpg') }}" alt="Mi décima foto" class="imagen">
+<br><br>
+</div>
+
+
+{% endblock %}
